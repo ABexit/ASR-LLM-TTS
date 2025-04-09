@@ -95,7 +95,15 @@ model = AutoModelForCausalLM.from_pretrained(
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 
 # --- CosyVoice - 语音合成模型
-cosyvoice = CosyVoice(r'E:\2_PYTHON\Project\GPT\QWen\pretrained_models\CosyVoice-300M', load_jit=True, load_onnx=False, fp16=True)
+# CosyVoice-300M和CosyVoice-300M-SFT的区别主要体现在以下几个方面：
+# 训练方式
+# CosyVoice-300M：是基座模型，未经过特定任务的微调，属于通用模型。
+# CosyVoice-300M-SFT：是在CosyVoice-300M的基础上，通过监督式微调（Supervised Fine-Tuning）训练得到的。
+# 音色特点
+# CosyVoice-300M：擅长准确代表说话者身份，能够通过3至10秒的音频样本克隆出音色。
+# CosyVoice-300M-SFT：内置了多个预训练音色，如中文女声、中文男声、日语男声、粤语女声等。
+# 以下模型名称从CosyVoice-300M改为CosyVoice-300M-SFT，修复运行后提示不存在中文女的报错，因为CosyVoice-300M中没有内置了多个预训练音色
+cosyvoice = CosyVoice(r'E:\2_PYTHON\Project\GPT\QWen\pretrained_models\CosyVoice-300M-SFT', load_jit=True, load_onnx=False, fp16=True)
 # --- CosyVoice - 支持的音色列表
 print(cosyvoice.list_avaliable_spks())
 # ------------------ 模型初始化结束 ----------------
